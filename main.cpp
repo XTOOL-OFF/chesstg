@@ -1,7 +1,7 @@
 #include "engine.h"
 
 using namespace std;
-int main() { // ne svetis suka (eclipse xuita)
+int main() { // ne svetis suka (eclipse xuita) 2
 	int board[8][8];
 	int dbgboard[8][8];
 
