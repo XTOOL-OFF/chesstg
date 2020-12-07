@@ -101,12 +101,9 @@ bool Board::checkMove(int board[8][8], int src[2], int dst[2], int piece) {
 	}
 	if (piece == 4 || piece == 10) {         // slon logic
 
-		if (abs(src[0]-dst[0]) != abs(src[1]-dst[1])) {
-			//printf("%i %i %i %i\n", src[0], src[1], dst[0], dst[1]);
-			//printf("%i\n", abs(src[0]-dst[0]));
-			//printf("%i\n", abs(src[1]-dst[1]));
+		if (abs(src[0]-dst[0]) != abs(src[1]-dst[1]))
 			return false;
-		}
+
 		int temp = dst[0]-src[0];
 		//printf("%i\n", temp);
 		if (temp > 0) {
@@ -145,15 +142,17 @@ bool Board::checkMove(int board[8][8], int src[2], int dst[2], int piece) {
 		if (src[0] + c == dst[0] && src[1] - c == dst[1]) { // diagonal
 			return !isEmpty(dstpiece);
 		}
-
-		return false;
 	}
 
 	if (piece == 2 || piece == 8) { // korol
-		if ((src[0] + 1 == dst[0] && src[1] == dst[1]) ||
-			(src[0] - 1 == dst[0] && src[1] == dst[1]) ||
-			(src[0] == dst[0] && src[1] + 1 == dst[1]) ||
-			(src[0] == dst[0] && src[1] - 1 == dst[1])) {
+
+		int x = src[0] - dst[0];
+		int y = src[1] - dst[1];
+
+		if ((abs(x) == 1 && y == 0) ||
+			(x == 0 && abs(y) == 1) ||
+			(abs(x) == 1 && abs(y) == 1)) {
+
 			return true;
 		}
 	}

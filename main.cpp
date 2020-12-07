@@ -13,7 +13,7 @@ int main() { // ne svetis suka (eclipse xuita) 2
 	dbg->namesMap();
 
 	int src[2] = {4,4};
-	board[src[0]][src[1]] = 13;
+	board[src[0]][src[1]] = 2;
 
 	//memcpy(dbgboard, board, 64*sizeof(int));
 	memset(dbgboard, 0, 64*sizeof(int));
