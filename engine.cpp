@@ -54,7 +54,7 @@ bool Board::checkMove(int board[8][8], int src[2], int dst[2], bool firstmove, i
 
 	bool empty = true;
 
-	if (piece == 5 || piece == 11) {        // ladia move check
+	if (piece == 6 || piece == 12) {        // ladia move check
 		if (src[0] != dst[0] && src[1] == dst[1]) {   // if move only in one direction[x]
 			for (int i=src[0]+1; i<dst[0]; i++) {
 				if (board[i][src[1]] != 0) {
@@ -73,18 +73,17 @@ bool Board::checkMove(int board[8][8], int src[2], int dst[2], bool firstmove, i
 		}
 		return empty;
 	}
-	if (piece == 4 || piece == 10) {    //kon logic
+	if (piece == 5 || piece == 11) {    //kon logic
+		int x = abs(src[0] - dst[0]);
+        int y = abs(src[1] - dst[1]);
 
-			int x = abs(src[0] - dst[0]);
-        		int y = abs(src[1] - dst[1]);
-
-			if ((x == 1 && y == 2) ||
-				(x == 2 && y == 1)) {
+		if ((x == 1 && y == 2) ||
+			(x == 2 && y == 1)) {
 			return true;
 		}
 		return false;
 	}
-	if (piece == 3 || piece == 9) {         // slon logic
+	if (piece == 4 || piece == 10) {         // slon logic
 
 		if (abs(src[0]-dst[0]) != abs(src[1]-dst[1])) {
 			//printf("%i %i %i %i\n", src[0], src[1], dst[0], dst[1]);
@@ -110,7 +109,7 @@ bool Board::checkMove(int board[8][8], int src[2], int dst[2], bool firstmove, i
 		return empty;
 	}
 
-	if (piece == 6) {                                                       // peshka WHITE
+	if (piece == 7) {                                                       // peshka WHITE
 		if ((src[0] - 1 == dst[0] && src[1] == dst[1]) ||
 			(firstmove == true && src[0] - 2 == dst[0] && src[1] == dst[1]) ||
 			(src[0] - 1 == dst[0] && src[1] + 1 == dst[1]) ||
@@ -132,7 +131,7 @@ bool Board::checkMove(int board[8][8], int src[2], int dst[2], bool firstmove, i
 			}
 		}
 	}
-	if (piece == 12) {                                                        // peshka BLACK
+	if (piece == 13) {                                                        // peshka BLACK
 			if ((src[0] + 1 == dst[0] && src[1] == dst[1]) ||
 				(firstmove == true && src[0] + 2 == dst[0] && src[1] == dst[1]) ||
 				(src[0] + 1 == dst[0] && src[1] + 1 == dst[1]) ||
@@ -155,7 +154,7 @@ bool Board::checkMove(int board[8][8], int src[2], int dst[2], bool firstmove, i
 			}
 		}
 
-	if (piece == 1 || piece == 7) {
+	if (piece == 2 || piece == 8) {
 		if ((src[0] + 1 == dst[0] && src[1] == dst[1]) ||
 			(src[0] - 1 == dst[0] && src[1] == dst[1]) ||
 			(src[0] == dst[0] && src[1] + 1 == dst[1]) ||
@@ -164,7 +163,7 @@ bool Board::checkMove(int board[8][8], int src[2], int dst[2], bool firstmove, i
 		}
 	}
 
-	if (piece == 2 || piece == 8) {
+	if (piece == 3 || piece == 9) {
 		Board *b = new Board();
 		if (b->checkMove(board, src, dst, false, 5) ||
 			b->checkMove(board, src, dst, false, 3)) {

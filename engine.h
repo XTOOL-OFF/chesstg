@@ -10,8 +10,8 @@ class Board {
 
 public:
 	Board();
-	const string names[13] = {"empty", "wkorol", "wkoroleva", "wslon", "wkon", "wladia", "wpeshka",
-						"bkorol", "bkoroleva", "bslon", "bkon", "bladia", "bpeshka"}; //parasha
+	const string names[14] = {"\u2b1b", "\u2b1c", "\u2654", "\u2655", "\u2657", "\u2658", "\u2656", "\u2659",
+						"\u265A", "\u265B", "\u265D", "\u265E", "\u265C", "\u265F"}; //parasha
 	void initBoard(int board[8][8]);
 	void move(int board[8][8], int src[2], int dst[2]);
 	bool checkMove(int board[8][8], int src[2], int dst[2], bool firstmove = false, int piece=-1);
@@ -26,5 +26,10 @@ public:
 	void namesMap();
 };
 
+class User {
+public:
+	User();
+	bool isLegal(string userinput);
+};
 
 #endif /* ENGINE_H_ */

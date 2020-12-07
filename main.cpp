@@ -11,7 +11,7 @@ int main() { // ne svetis suka (eclipse xuita) 2
 	b->initBoard(board);
 
 	int src[2] = {4,4};
-	board[src[0]][src[1]] = 2;
+	board[src[0]][src[1]] = 4;
 
 	memcpy(dbgboard, board, 64*sizeof(int));
 
