@@ -7,19 +7,23 @@ int main() { // ne svetis suka (eclipse xuita) 2
 
 	Board *b = new Board();
 	Debug *dbg = new Debug();
-	b ->clearBoard(board);
-	b->initBoard(board);
+	b->clearBoard(board);
+	//b->initBoard(board);
 
-	int src[2] = {2,1};
-	board[src[0]][src[1]] = 7;
+	dbg->namesMap();
 
-	memcpy(dbgboard, board, 64*sizeof(int));
+	int src[2] = {4,4};
+	board[src[0]][src[1]] = 13;
+
+	//memcpy(dbgboard, board, 64*sizeof(int));
+	memset(dbgboard, 0, 64*sizeof(int));
+	dbgboard[src[0]][src[1]] = 2;
 
 	for (int i=0; i<8; i++) {
 		for (int j=0; j<8; j++) {
 			int dst[2] = {i, j};
-			if (b->checkMove(board, src, dst, false) == true) {
-				dbgboard[dst[0]][dst[1]] = 3;
+			if (b->checkMove(board, src, dst) == true) {
+				dbgboard[i][j] = 1;
 			} else {
 				//printf("0 ");
 			}
@@ -30,5 +34,4 @@ int main() { // ne svetis suka (eclipse xuita) 2
 
 //	//printf("%i\n", b->checkMove(board, src, dst));
 	dbg->showBoard(dbgboard);
-	dbg->namesMap();
 }

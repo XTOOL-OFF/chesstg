@@ -57,10 +57,12 @@ void Board::move(int board[8][8], int src[2], int dst[2]) {
 	board[dst[0]][dst[1]] = piece;
 }
 
-bool Board::checkMove(int board[8][8], int src[2], int dst[2], bool firstmove, int piece) {
+bool Board::checkMove(int board[8][8], int src[2], int dst[2], int piece) {
 	if (piece == -1) {
 		piece = board[src[0]][src[1]];
 	}
+
+	int dstpiece = board[dst[0]][dst[1]];
 
 	if (src[0] == dst[0] && src[1] == dst[1]) {
 		return false;
@@ -123,39 +125,31 @@ bool Board::checkMove(int board[8][8], int src[2], int dst[2], bool firstmove, i
 		return empty;
 	}
 
-	if (piece == 7) {  // white PESHKA rassist
-		if (src[0] - 2 == dst[0] && firstmove == true && src[1] == dst[1]) {
-			return true;
-		} else if (src[0] - 1 == dst[0] && src[1] == dst[1]) {
-			if (board[dst[0]][dst[1]] == 0 || board[dst[0]][dst[1]] == 1) {
+	if (piece == 7 || piece == 13) {  // peshki
+
+		int c;
+		if (piece == 7) // black
+			c = 1;
+		else
+			c = -1; // white
+
+		if (src[0] + (2*c) == dst[0] && src[1] == dst[1]) { // starting
+			if (src[0] == 1 || src[0] == 6)
 				return true;
-			}
-		} else if ((src[0] - 1 == dst[0] && src[1] - 1 == dst[1]) || (src[0] - 1 == dst[0] && src[1] + 1 == dst[1])) {
-			if (board[dst[0]][dst[1]] != 1 && board[dst[0]][dst[1]] != 0) {
-				return true;
-			}
-		} else {
-			return false;
 		}
+
+		if (src[0] + c == dst[0] && src[1] == dst[1]) {
+			return isEmpty(dstpiece);
+		}
+
+		if (src[0] + c == dst[0] && src[1] - c == dst[1]) { // diagonal
+			return !isEmpty(dstpiece);
+		}
+
+		return false;
 	}
 
-	if (piece == 13) { // black PESHKA rassist
-			if (src[0] + 2 == dst[0] && firstmove == true && src[1] == dst[1]) {
-				return true;
-			} else if (src[0] + 1 == dst[0] && src[1] == dst[1]) {
-				if (board[dst[0]][dst[1]] == 0 || board[dst[0]][dst[1]] == 1) {
-					return true;
-				}
-			} else if ((src[0] + 1 == dst[0] && src[1] + 1 == dst[1]) || (src[0] + 1 == dst[0] && src[1] - 1 == dst[1])) {
-				if (board[dst[0]][dst[1]] != 1 && board[dst[0]][dst[1]] != 0) {
-					return true;
-				}
-			} else {
-				return false;
-			}
-		}
-
-	if (piece == 2 || piece == 8) {
+	if (piece == 2 || piece == 8) { // korol
 		if ((src[0] + 1 == dst[0] && src[1] == dst[1]) ||
 			(src[0] - 1 == dst[0] && src[1] == dst[1]) ||
 			(src[0] == dst[0] && src[1] + 1 == dst[1]) ||
@@ -164,15 +158,19 @@ bool Board::checkMove(int board[8][8], int src[2], int dst[2], bool firstmove, i
 		}
 	}
 
-	if (piece == 3 || piece == 9) {
-		Board *b = new Board();
-		if (b->checkMove(board, src, dst, false, 5) ||
-			b->checkMove(board, src, dst, false, 3)) {
+	if (piece == 3 || piece == 9) { // koroleva
+		//Board *b = new Board();
+		if (checkMove(board, src, dst, 5) ||
+			checkMove(board, src, dst, 3)) {
 			return true;
 		}
 	}
 
 	return false;
+}
+
+bool Board::isEmpty(int piece) {
+	return (piece == 0 || piece == 1);
 }
 
 // debug funcs
