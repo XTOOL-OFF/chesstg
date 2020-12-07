@@ -73,15 +73,13 @@ bool Board::checkMove(int board[8][8], int src[2], int dst[2], bool firstmove, i
 		}
 		return empty;
 	}
-	if (piece == 4 || piece == 10) {
-		if ((src[0] + 2 == dst[0] && src[1] - 1 == dst[1]) ||
-			(src[0] + 2 == dst[0] && src[1] + 1 == dst[1]) ||
-			(src[0] + 1 == dst[0] && src[1] - 2 == dst[1]) ||
-			(src[0] + 1 == dst[0] && src[1] + 2 == dst[1]) ||     // kon logic
-			(src[0] - 1 == dst[0] && src[1] + 2 == dst[1]) ||
-			(src[0] - 1 == dst[0] && src[1] - 2 == dst[1]) ||
-			(src[0] - 2 == dst[0] && src[1] + 1 == dst[1]) ||
-			(src[0] - 2 == dst[0] && src[1] - 1 == dst[1])) {
+	if (piece == 4 || piece == 10) {    //kon logic
+
+			int x = abs(src[0] - dst[0]);
+        		int y = abs(src[1] - dst[1]);
+
+			if ((x == 1 && y == 2) ||
+				(x == 2 && y == 1)) {
 			return true;
 		}
 		return false;
