@@ -9,6 +9,10 @@ int main() { // ne svetis suka (eclipse xuita) 2
 
 	ChessUser *u = new ChessUser();
 
+	u->bot->getEvents().onCommand("start", [u](TgBot::Message::Ptr msg) {
+		u->bot->getApi().sendMessage(msg->chat->id, "Hi!");
+	});
+
 	Board *b = new Board();
 	Debug *dbg = new Debug();
 	b->clearBoard(board);

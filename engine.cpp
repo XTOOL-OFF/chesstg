@@ -108,15 +108,11 @@ bool Board::checkMove(int board[8][8], int src[2], int dst[2], int piece) {
 		//printf("%i\n", temp);
 		if (temp > 0) {
 			for(int i=1; i<temp; i++) {
-				if (board[i+src[0]][i+src[1]] != 0 && board[i+src[0]][i+src[1]] != 1) {
-					empty = false;
-				}
+				empty = isEmpty(board[i+src[0]][i+src[1]]);
 			}
 		} else {
 			for(int i=-1; i>temp; i--) {
-				if (board[i+src[0]][i+src[1]] != 0 && board[i+src[0]][i+src[1]] != 1) {
-					empty = false;
-				}
+				empty = isEmpty(board[i+src[0]][i+src[1]]);
 			}
 		}
 		return empty;
