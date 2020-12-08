@@ -1,9 +1,13 @@
 #include "engine.h"
+#include "user.h"
 
 using namespace std;
+
 int main() { // ne svetis suka (eclipse xuita) 2
 	int board[8][8];
 	int dbgboard[8][8];
+
+	ChessUser *u = new ChessUser();
 
 	Board *b = new Board();
 	Debug *dbg = new Debug();
@@ -34,4 +38,16 @@ int main() { // ne svetis suka (eclipse xuita) 2
 
 //	//printf("%i\n", b->checkMove(board, src, dst));
 	dbg->showBoard(dbgboard);
+
+	try {
+
+	TgBot::TgLongPoll poll(*u->bot);
+	while (1) {
+		poll.start();
+	}
+
+	} catch (TgBot::TgException& e) {
+		printf("Error: %s\n", e.what());
+		return -1;
+	}
 }
